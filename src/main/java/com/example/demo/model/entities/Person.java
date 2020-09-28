@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
@@ -19,6 +22,9 @@ public class Person implements Serializable {
   private String name;
 
   @Column(name = "last_name")
+  @NotNull
+  @NotEmpty
+  @Size(min = 2, max = 50)
   private String lastName;
 
   @Column(name = "phone_number")
