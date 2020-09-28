@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 
+import com.example.demo.exceptions.BusinessException;
 import com.example.demo.model.entities.Person;
 import com.example.demo.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class PersonService {
   public void create(Person p) {
     boolean personExist = personRepository.existsById(p.getId());
 
-    if (personExist) throw new RuntimeException("Ya existe la persona");
+    if (personExist) throw new BusinessException("Ya existe la persona");
 
     personRepository.save(p);
 
