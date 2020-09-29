@@ -3,6 +3,7 @@ package com.example.demo.exceptions;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import org.aspectj.weaver.ast.Not;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,7 +28,7 @@ public class ExceptionManager {
     return new ErrorMessage(exc.getMessage(), exc.getErrorCode());
   }
 
-  @ExceptionHandler({InvalidFormatException.class, IllegalArgumentException.class})
+  @ExceptionHandler({InvalidFormatException.class, MethodArgumentNotValidException.class})
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   @ResponseBody
   public ErrorMessage handleParamsError(HttpServletRequest req, Exception exc){

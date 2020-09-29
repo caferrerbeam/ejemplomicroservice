@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -28,13 +29,13 @@ public class PersonController {
   }
 
   @PostMapping
-  public void create(@RequestBody Person person){
+  public void create(@RequestBody @Valid Person person){
      personService.create(person);
   }
 
 
   @PutMapping("/{id}")
-  public void update(@PathVariable Integer id, @RequestBody Person person){
+  public void update(@PathVariable Integer id, @RequestBody @Valid Person person){
     personService.update(id, person);
   }
 
