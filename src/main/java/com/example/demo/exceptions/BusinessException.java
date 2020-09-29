@@ -1,12 +1,23 @@
 package com.example.demo.exceptions;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
+public class BusinessException extends  RuntimeException {
 
-@ResponseStatus(value= HttpStatus.PRECONDITION_FAILED)
- public class BusinessException extends RuntimeException {
+  private String errorCode;
 
- public BusinessException(String message) {
-  super(message);
- }
+  public BusinessException(String message) {
+    super(message);
+  }
+
+  public BusinessException(String message, String errorCode) {
+    super(message);
+    this.errorCode = errorCode;
+  }
+
+  public String getErrorCode() {
+    return errorCode;
+  }
+
+  public void setErrorCode(String errorCode) {
+    this.errorCode = errorCode;
+  }
 }

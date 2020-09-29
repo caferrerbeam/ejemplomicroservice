@@ -12,4 +12,6 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
 
   @Query("SELECT p FROM Person p WHERE lower(p.name) like lower(:name)")
   List<Person> findByName(String name);
+
+  List<Person> findByPhoneNumber(String phoneNumber);
 }
