@@ -23,6 +23,9 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 	testImplementation 'org.springframework.kafka:spring-kafka-test'
+	implementation 'org.springframework.boot:spring-boot-starter-cache'
+	implementation 'redis.clients:jedis'
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 	implementation 'org.flywaydb:flyway-core'
 	compile group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.4.7'
 }

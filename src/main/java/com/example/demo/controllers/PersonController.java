@@ -25,12 +25,13 @@ public class PersonController {
 
   @GetMapping("/{id}")
   public Person find(@PathVariable Integer id){
-    return personService.find(id);
+    return personService.find2(id);
   }
 
   @PostMapping
   public void create(@RequestBody @Valid Person person){
-     personService.create(person);
+
+    personService.create(person);
   }
 
 
