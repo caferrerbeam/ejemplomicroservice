@@ -5,7 +5,10 @@ import com.example.demo.exceptions.BusinessException;
 import com.example.demo.exceptions.NotFoundException;
 import com.example.demo.model.entities.Person;
 import com.example.demo.repositories.PersonRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +18,12 @@ public class PersonService {
 
   @Autowired
   private PersonRepository personRepository;
+
+  @Autowired
+  private RedisTemplate<String, String> redisTemplate;
+
+  @Autowired
+  private ObjectMapper objectMapper;
 
   public void create(Person p) {
     boolean personExist = personRepository.existsById(p.getId());
@@ -30,7 +39,17 @@ public class PersonService {
   }
 
   public Person find(Integer id) {
-    return personRepository.findById(id).get();
+
+    Person p = personRepository.findById(id).get();
+
+    try {
+      redisTemplate.opsForValue().set(id.toString(), objectMapper.writeValueAsString(p));
+    } catch (JsonProcessingException e) {
+      e.printStackTrace();
+    }
+
+    return p;
+
   }
 
   public void update(Integer id, Person p) {
